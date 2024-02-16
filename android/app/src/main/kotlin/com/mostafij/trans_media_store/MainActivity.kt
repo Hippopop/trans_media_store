@@ -1,4 +1,4 @@
-package com.transmedia.tr.store.tr_store_transmedia
+package com.mostafij.trans_media_store
 
 import io.flutter.embedding.android.FlutterActivity
 

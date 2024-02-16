@@ -1,3 +1,3 @@
-# tr_store_transmedia
+# trans_media_store
 
 A new Flutter project.

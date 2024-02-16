@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.transmedia.tr.store" "\0"
-            VALUE "FileDescription", "tr_store_transmedia" "\0"
+            VALUE "CompanyName", "com.mostafij" "\0"
+            VALUE "FileDescription", "trans_media_store" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "tr_store_transmedia" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2024 com.transmedia.tr.store. All rights reserved." "\0"
-            VALUE "OriginalFilename", "tr_store_transmedia.exe" "\0"
-            VALUE "ProductName", "tr_store_transmedia" "\0"
+            VALUE "InternalName", "trans_media_store" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2024 com.mostafij. All rights reserved." "\0"
+            VALUE "OriginalFilename", "trans_media_store.exe" "\0"
+            VALUE "ProductName", "trans_media_store" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

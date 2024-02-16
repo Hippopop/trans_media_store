@@ -1,6 +1,6 @@
 {
-    "name": "tr_store_transmedia",
-    "short_name": "tr_store_transmedia",
+    "name": "trans_media_store",
+    "short_name": "trans_media_store",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
