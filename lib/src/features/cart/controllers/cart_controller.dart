@@ -4,12 +4,5 @@ import 'package:trans_media_store/src/data/products_provider/products_provider.d
 
 final cartProvider = FutureProvider<List<ProductModel>>((ref) async {
   final currentList = ref.watch(productNotifierProvider);
-
-  return currentList.when(
-    loading: () => [],
-    data: (data) => data.where((element) => element.inCart!).toList(),
-    error: (error, stackTrace) {
-      throw error;
-    },
-  );
+  return (currentList.value ?? []).where((element) => element.inCart!).toList();
 });

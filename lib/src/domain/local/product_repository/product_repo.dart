@@ -44,7 +44,7 @@ final class ProductLocalRepository {
     required ProductDataTableCompanion updatedData,
   }) async {
     try {
-      await database.insertOrUpdateAllProducts([updatedData]);
+      await database.productsDao.insertOrUpdateAllProducts([updatedData]);
       return getProductDetails(productId: updatedData.id.value!);
     } catch (e, s) {
       log("#LocalProductDetailsGetError", error: e, stackTrace: s);
@@ -56,7 +56,7 @@ final class ProductLocalRepository {
     List<ProductDataTableCompanion> newProducts,
   ) async {
     try {
-      await database.insertOrUpdateAllProducts(newProducts);
+      await database.productsDao.insertOrUpdateAllProducts(newProducts);
     } catch (e, s) {
       log("#LocalAllProductInsertError", error: e, stackTrace: s);
       rethrow;

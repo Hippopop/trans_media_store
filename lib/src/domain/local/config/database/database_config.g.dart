@@ -42,6 +42,12 @@ class $ProductDataTableTable extends ProductDataTable
   late final GeneratedColumn<String> title = GeneratedColumn<String>(
       'title', aliasedName, true,
       type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _contentMeta =
+      const VerificationMeta('content');
+  @override
+  late final GeneratedColumn<String> content = GeneratedColumn<String>(
+      'content', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
   static const VerificationMeta _imageMeta = const VerificationMeta('image');
   @override
   late final GeneratedColumn<String> image = GeneratedColumn<String>(
@@ -84,6 +90,7 @@ class $ProductDataTableTable extends ProductDataTable
         slug,
         url,
         title,
+        content,
         image,
         thumbnail,
         status,
@@ -124,6 +131,10 @@ class $ProductDataTableTable extends ProductDataTable
     if (data.containsKey('title')) {
       context.handle(
           _titleMeta, title.isAcceptableOrUnknown(data['title']!, _titleMeta));
+    }
+    if (data.containsKey('content')) {
+      context.handle(_contentMeta,
+          content.isAcceptableOrUnknown(data['content']!, _contentMeta));
     }
     if (data.containsKey('image')) {
       context.handle(
@@ -172,6 +183,8 @@ class $ProductDataTableTable extends ProductDataTable
           .read(DriftSqlType.string, data['${effectivePrefix}url']),
       title: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}title']),
+      content: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}content']),
       image: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}image']),
       thumbnail: attachedDatabase.typeMapping
@@ -201,6 +214,7 @@ class ProductDataTableData extends DataClass
   final String? slug;
   final String? url;
   final String? title;
+  final String? content;
   final String? image;
   final String? thumbnail;
   final String? status;
@@ -214,6 +228,7 @@ class ProductDataTableData extends DataClass
       this.slug,
       this.url,
       this.title,
+      this.content,
       this.image,
       this.thumbnail,
       this.status,
@@ -240,6 +255,9 @@ class ProductDataTableData extends DataClass
     }
     if (!nullToAbsent || title != null) {
       map['title'] = Variable<String>(title);
+    }
+    if (!nullToAbsent || content != null) {
+      map['content'] = Variable<String>(content);
     }
     if (!nullToAbsent || image != null) {
       map['image'] = Variable<String>(image);
@@ -273,6 +291,9 @@ class ProductDataTableData extends DataClass
       url: url == null && nullToAbsent ? const Value.absent() : Value(url),
       title:
           title == null && nullToAbsent ? const Value.absent() : Value(title),
+      content: content == null && nullToAbsent
+          ? const Value.absent()
+          : Value(content),
       image:
           image == null && nullToAbsent ? const Value.absent() : Value(image),
       thumbnail: thumbnail == null && nullToAbsent
@@ -302,6 +323,7 @@ class ProductDataTableData extends DataClass
       slug: serializer.fromJson<String?>(json['slug']),
       url: serializer.fromJson<String?>(json['url']),
       title: serializer.fromJson<String?>(json['title']),
+      content: serializer.fromJson<String?>(json['content']),
       image: serializer.fromJson<String?>(json['image']),
       thumbnail: serializer.fromJson<String?>(json['thumbnail']),
       status: serializer.fromJson<String?>(json['status']),
@@ -320,6 +342,7 @@ class ProductDataTableData extends DataClass
       'slug': serializer.toJson<String?>(slug),
       'url': serializer.toJson<String?>(url),
       'title': serializer.toJson<String?>(title),
+      'content': serializer.toJson<String?>(content),
       'image': serializer.toJson<String?>(image),
       'thumbnail': serializer.toJson<String?>(thumbnail),
       'status': serializer.toJson<String?>(status),
@@ -336,6 +359,7 @@ class ProductDataTableData extends DataClass
           Value<String?> slug = const Value.absent(),
           Value<String?> url = const Value.absent(),
           Value<String?> title = const Value.absent(),
+          Value<String?> content = const Value.absent(),
           Value<String?> image = const Value.absent(),
           Value<String?> thumbnail = const Value.absent(),
           Value<String?> status = const Value.absent(),
@@ -349,6 +373,7 @@ class ProductDataTableData extends DataClass
         slug: slug.present ? slug.value : this.slug,
         url: url.present ? url.value : this.url,
         title: title.present ? title.value : this.title,
+        content: content.present ? content.value : this.content,
         image: image.present ? image.value : this.image,
         thumbnail: thumbnail.present ? thumbnail.value : this.thumbnail,
         status: status.present ? status.value : this.status,
@@ -365,6 +390,7 @@ class ProductDataTableData extends DataClass
           ..write('slug: $slug, ')
           ..write('url: $url, ')
           ..write('title: $title, ')
+          ..write('content: $content, ')
           ..write('image: $image, ')
           ..write('thumbnail: $thumbnail, ')
           ..write('status: $status, ')
@@ -376,8 +402,8 @@ class ProductDataTableData extends DataClass
   }
 
   @override
-  int get hashCode => Object.hash(inCart, id, userId, slug, url, title, image,
-      thumbnail, status, category, publishedAt, updatedAt);
+  int get hashCode => Object.hash(inCart, id, userId, slug, url, title, content,
+      image, thumbnail, status, category, publishedAt, updatedAt);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -388,6 +414,7 @@ class ProductDataTableData extends DataClass
           other.slug == this.slug &&
           other.url == this.url &&
           other.title == this.title &&
+          other.content == this.content &&
           other.image == this.image &&
           other.thumbnail == this.thumbnail &&
           other.status == this.status &&
@@ -403,6 +430,7 @@ class ProductDataTableCompanion extends UpdateCompanion<ProductDataTableData> {
   final Value<String?> slug;
   final Value<String?> url;
   final Value<String?> title;
+  final Value<String?> content;
   final Value<String?> image;
   final Value<String?> thumbnail;
   final Value<String?> status;
@@ -416,6 +444,7 @@ class ProductDataTableCompanion extends UpdateCompanion<ProductDataTableData> {
     this.slug = const Value.absent(),
     this.url = const Value.absent(),
     this.title = const Value.absent(),
+    this.content = const Value.absent(),
     this.image = const Value.absent(),
     this.thumbnail = const Value.absent(),
     this.status = const Value.absent(),
@@ -430,6 +459,7 @@ class ProductDataTableCompanion extends UpdateCompanion<ProductDataTableData> {
     this.slug = const Value.absent(),
     this.url = const Value.absent(),
     this.title = const Value.absent(),
+    this.content = const Value.absent(),
     this.image = const Value.absent(),
     this.thumbnail = const Value.absent(),
     this.status = const Value.absent(),
@@ -444,6 +474,7 @@ class ProductDataTableCompanion extends UpdateCompanion<ProductDataTableData> {
     Expression<String>? slug,
     Expression<String>? url,
     Expression<String>? title,
+    Expression<String>? content,
     Expression<String>? image,
     Expression<String>? thumbnail,
     Expression<String>? status,
@@ -458,6 +489,7 @@ class ProductDataTableCompanion extends UpdateCompanion<ProductDataTableData> {
       if (slug != null) 'slug': slug,
       if (url != null) 'url': url,
       if (title != null) 'title': title,
+      if (content != null) 'content': content,
       if (image != null) 'image': image,
       if (thumbnail != null) 'thumbnail': thumbnail,
       if (status != null) 'status': status,
@@ -474,6 +506,7 @@ class ProductDataTableCompanion extends UpdateCompanion<ProductDataTableData> {
       Value<String?>? slug,
       Value<String?>? url,
       Value<String?>? title,
+      Value<String?>? content,
       Value<String?>? image,
       Value<String?>? thumbnail,
       Value<String?>? status,
@@ -487,6 +520,7 @@ class ProductDataTableCompanion extends UpdateCompanion<ProductDataTableData> {
       slug: slug ?? this.slug,
       url: url ?? this.url,
       title: title ?? this.title,
+      content: content ?? this.content,
       image: image ?? this.image,
       thumbnail: thumbnail ?? this.thumbnail,
       status: status ?? this.status,
@@ -516,6 +550,9 @@ class ProductDataTableCompanion extends UpdateCompanion<ProductDataTableData> {
     }
     if (title.present) {
       map['title'] = Variable<String>(title.value);
+    }
+    if (content.present) {
+      map['content'] = Variable<String>(content.value);
     }
     if (image.present) {
       map['image'] = Variable<String>(image.value);
@@ -547,6 +584,7 @@ class ProductDataTableCompanion extends UpdateCompanion<ProductDataTableData> {
           ..write('slug: $slug, ')
           ..write('url: $url, ')
           ..write('title: $title, ')
+          ..write('content: $content, ')
           ..write('image: $image, ')
           ..write('thumbnail: $thumbnail, ')
           ..write('status: $status, ')
@@ -562,6 +600,7 @@ abstract class _$StoreLocalDatabase extends GeneratedDatabase {
   _$StoreLocalDatabase(QueryExecutor e) : super(e);
   late final $ProductDataTableTable productDataTable =
       $ProductDataTableTable(this);
+  late final ProductsDao productsDao = ProductsDao(this as StoreLocalDatabase);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
