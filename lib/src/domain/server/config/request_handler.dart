@@ -1,9 +1,14 @@
 import 'dart:developer' show log;
 
 import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:trans_media_store/src/utilities/scaffold_utils/snackbar_util.dart';
 
 import 'api/api_config.dart';
+
+final requestHandlerProvider = Provider<RequestHandler>((ref) {
+  return RequestHandler();
+});
 
 class RequestHandler {
   Dio get dio => Dio(

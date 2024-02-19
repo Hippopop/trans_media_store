@@ -1,1 +1,8 @@
 include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  plugins:
+    # For (*Drift).
+    - drift_dev
+    # For (*Riverpod).
+    # - custom_lint
