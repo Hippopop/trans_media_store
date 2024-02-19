@@ -7,26 +7,19 @@ import 'package:path/path.dart' as p;
 import 'package:sqlite3/sqlite3.dart';
 import 'package:sqlite3_flutter_libs/sqlite3_flutter_libs.dart';
 
+import '../../product_repository/daos/product_dao.dart';
 import '../../product_repository/tables/products_table.dart';
 
 part 'database_config.g.dart';
 
 const _appDataBaseName = "tr_store_db.sqlite";
 
-@DriftDatabase(tables: [ProductDataTable])
+@DriftDatabase(tables: [ProductDataTable], daos: [ProductsDao])
 class StoreLocalDatabase extends _$StoreLocalDatabase {
   StoreLocalDatabase() : super(_openConnection());
 
   @override
   int get schemaVersion => 1;
-
-  Future<void> insertOrUpdateAllProducts(
-    List<ProductDataTableCompanion> newProducts,
-  ) async {
-    await batch((batch) async {
-      batch.insertAllOnConflictUpdate(productDataTable, newProducts);
-    });
-  }
 }
 
 LazyDatabase _openConnection() {

@@ -7,6 +7,7 @@ class ProductDataTable extends Table {
   TextColumn get slug => text().nullable()();
   TextColumn get url => text().nullable()();
   TextColumn get title => text().nullable()();
+  TextColumn get content => text().nullable()();
   TextColumn get image => text().nullable()();
   TextColumn get thumbnail => text().nullable()();
   TextColumn get status => text().nullable()();

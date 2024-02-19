@@ -8,7 +8,6 @@ final productPageProvider =
 );
 
 class ProductPageNotifier extends AsyncNotifier<List<ProductModel>> {
-  // late final _productProvider = ref.watch(productNotifierProvider);
   @override
   build() async {
     ref.listen(
@@ -17,6 +16,6 @@ class ProductPageNotifier extends AsyncNotifier<List<ProductModel>> {
         ref.invalidateSelf();
       },
     );
-    return await ref.watch(productNotifierProvider.notifier).future;
+    return await ref.read(productNotifierProvider.notifier).future;
   }
 }
